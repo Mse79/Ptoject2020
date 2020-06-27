@@ -474,36 +474,18 @@ void Ausgabeheader(char *output)
 	Datei=fopen(*output, "w+");
 	fprintf(Datei,"%d-%02d-%02d %02d:%02d:%02d\n", tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec);
 		fprintf(Datei,";");
-		fprintf(Datei,"Zeit seit Simulationsstart");
+		fprintf(Datei,"Zeit seit Simulationsstart in s");
 		fprintf(Datei,";");
-		fprintf(Datei,"Wegstrecke ab Simulationsstart");
+		fprintf(Datei,"Wegstrecke ab Simulationsstart in m");
 		fprintf(Datei,";");
-		fprintf(Datei,"Eigengeschwindigkeit ve");
+		fprintf(Datei,"Eigengeschwindigkeit ve in km/h");
 		fprintf(Datei,";");
-		fprintf(Datei,"Geschwindigkeit Vordermann vf");
+		fprintf(Datei,"Geschwindigkeit Vordermann vf in km/h");
 		fprintf(Datei,";");
 		fprintf(Datei,"Status ART ein/aus(1/0)");
 		fprintf(Datei,";");
-		fprintf(Datei,"Zielgeschwindigkeit(ART)");
+		fprintf(Datei,"Zielgeschwindigkeit(ART) in km/h");
 		fprintf(Datei,";\n");
-		for(Striche=0;Striche<155;Striche++)
-		{
-			if(Striche==27||Striche==58||Striche==82||Striche==112||Striche==134)
-			{
-				fprintf(Datei,"+");
-			}
-			else
-			{
-				if(Striche==0||Striche==154)
-				{
-					fprintf(Datei,";");
-				}
-				else
-				{
-					fprintf(Datei,"-");
-				}
-			}
-		}
 	fclose(Datei);
 }
 
@@ -514,7 +496,7 @@ void Ausgabe(float *total_t, float *s, float *ve, float *vf, short *ART, float *
 	FILE *Datei;
 	Datei=fopen(Pfad, "a");
 	fprintf(Datei,"\n");
-	fprintf(Datei,";%25f s;%29f m;%19f km/h;%25f km/h;%21hd;%15fkm/h;", *total_t, *s, *ve, *vf, *ART, *ZART);
+	fprintf(Datei,"%f;%f;%f;%f;%hd;%f", *total_t, *s, *ve, *vf, *ART, *ZART);
 	fclose(Datei);
 }
 
